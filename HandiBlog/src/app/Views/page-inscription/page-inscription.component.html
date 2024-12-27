@@ -1,0 +1,39 @@
+<form class="max-w-screen-2xl mx-auto " xmlns="http://www.w3.org/1999/html"   [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+  <div class="flex flex-col space-y-7 mt-7 items-center  ">
+
+  <select value="" id="typeSelect" class="form-control p-2" formControlName="type">
+    <option value="Professionel">Professionel</option>
+    <option value="Particulier">Particulier</option>
+  </select>
+
+  <input type="text" name="prenom" id="prenom" formControlName="prenom" class="form-control placeholder: text-lg p-2 "   placeholder="Prenom" [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.prenom)" required>
+   <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.prenom)">
+     Le prenom est requis </small>
+
+     <input type="text" name="nom" id="nom" formControlName="nom" class="form-control placeholder: text-lg p-2 " placeholder="Nom" [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.nom)" required>
+    <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.nom)"> Le nom est requis </small>
+
+    <input type="email" name="email" id="email" formControlName="email" class="form-control placeholder: text-lg p-2 " placeholder="Email" [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.email)" required>
+    <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.email)"> L'email est requis </small>
+
+    <input type="password" name="motPasse" id="motPasse" formControlName="password" class="form-control placeholder: text-lg p-2 " [class.is-invalid]="formGroup.controls.password" placeholder="Mot de passe">
+    <small class="text-danger" *ngIf="formGroup.controls.password.invalid">
+      <ng-container *ngIf="formGroup.controls.password.hasError('required')">
+        Le mot de passe est requis
+      </ng-container>
+      <ng-container *ngIf="formGroup.controls.password.hasError('minlength')">
+        Le mot de passe doit contenir 8 caracteres
+      </ng-container>
+    </small>
+
+    <input type="password" name="motPasse2" id="motPasse2" formControlName="password2" class="form-control placeholder: text-lg p-2" placeholder="Repetez le Mot de passe" [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.password2)" required>
+    <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.password2)"> Le 2nd mot de passe est requis </small>
+
+    <input type="submit" name="valider" id="valider" class="bg-cyan-700 w-72  text-xl text-gray-100 rounded-2xl" value="Valider">
+  </div>
+  <!--
+        getRawValue nonNullable
+     -->
+
+</form>
