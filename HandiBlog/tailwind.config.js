@@ -15,13 +15,16 @@ module.exports = {
         blancbleu: '#E2F0EF',
         header: '#A9D4D6',
         green : '#42A390',
+
+        bleubleu : '#82C3C5',
         testblanc: '#F6F5F1',
       },
       textColor : {
         light_gray: '#90A6B4',
         green : '#42A390',
         rouge: '#C46960',
-        bleubleubleu : '#82C3C5'
+        bleubleubleu : '#82C3C5',
+        bleucanard : '#065758'
 
       },
       borderColor :{
