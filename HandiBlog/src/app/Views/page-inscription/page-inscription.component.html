@@ -1,16 +1,10 @@
 <div class="flex justify-center items-start min-h-screen sm:my-40 sm:mr-10 md:my-0">
-  <div class=" flex flex-row  w-3/4 justify-center align-items:center md:mx-auto xl:mx-auto border-2  space-x-4 shadow-md rounded-md">
-    <div class="flex flex-col w-2/5 mr-10 text-center justify-center  ">
-      <div class="font-bold text-xl  "><h1>Pourquoi s'inscrire ? </h1>
-      </div>
-      <p class="">Vous pourrez communiquer avec d'autres gens et publier votre profil et des articles</p>
+  <div class=" flex flex-row  w-3/4 justify-center align-items:center md:mx-auto xl:mx-auto space-x-4 shadow-md rounded-md border-2 mt-3">
+    <div class="flex flex-col w-1/2 text-center justify-center sm:ml-5   ">
+      <p class="  font-bold text-2xl  ">Pourquoi s'inscrire ? </p>
+      <p class=" text-lg">Vous pourrez communiquer avec d'autres gens et publier votre profil et des articles</p>
     </div>
-    <div class="flex flex-col  w-2/5 mx-auto">
-     <div>
-       <form class="sm:mr-10 mx-auto " xmlns="http://www.w3.org/1999/html"   [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-
-         <div class="flex flex-col items-center space-y-7 my-7 mx-auto ">
-
+       <form class="w-1/2 flex flex-col space-y-7 items-center mx-auto  p-5 " xmlns="http://www.w3.org/1999/html"   [formGroup]="formGroup" (ngSubmit)="onSubmit()">
 
            <select value="" id="typeSelect" class="inputSignup p-2  text-bleubleubleu" formControlName="type" >
              <option value="">&#45;&#45;Vous êtes un &#45;&#45;</option>
@@ -44,15 +38,15 @@
            <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.password2)"> Le 2nd mot de passe est requis </small>
            <small class="text-danger" *ngIf="formGroup?.errors?.['mismatch']"> Les mots de passes doivent être identiques</small>
 
-           <div class=" flex flex-col w-64 space-y-4 mt-7 items-center text-rouge text-base">
+           <div class=" flex flex-col  space-y-4  mt-7 items-center text-rouge text-base">
              <small #minuscule > au moins une minuscule</small>
              <small #majuscule > au moins une majuscule</small>
              <small #chiffre> au moins un chiffre </small>
              <small #speciaux> au moins un des caracteres speciaux ! : / ; . , ?</small>
            </div>
 
-           <button type="submit" id="valider" class=" bg-bleubleu w-40  text-xl text-bleucanard  rounded-xl"> Valider</button>
-         </div>
+           <button type="submit" id="valider" class=" bg-bleubleu w-40 self-center  text-xl text-bleucanard  rounded-xl"> Valider</button>
+
    <!--      &lt;!&ndash;
          getRawValue nonNullable
 
@@ -70,9 +64,8 @@
 
        </form>
      </div>
-    </div>
   </div>
-</div>
+
 
 
 
