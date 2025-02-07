@@ -4,6 +4,7 @@ import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators
 import {NgIf} from '@angular/common';
 import {ApiService} from '../../Services/api.service';
 import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-page-inscription',
@@ -19,7 +20,7 @@ export class PageInscriptionComponent {
   @ViewChild('speciaux') speciaux!: ElementRef;
 
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,  private router: Router) {
   }
  formGroup = new FormGroup(
    {
@@ -98,7 +99,8 @@ checkPassword(pwd: FormControl): void {
 
 
    this.apiService.sendData(formData, '/users/create').subscribe({
-     next: (response) => console.log('Success:', response),
+     next: (response) => this.router.navigate(['/login']),
+
      error: (error) => console.error('Error:', error),
    });
  }
