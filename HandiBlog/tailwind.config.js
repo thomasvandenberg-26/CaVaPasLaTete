@@ -34,7 +34,10 @@ module.exports = {
         vertvertvert: '#42A390'
 
       },
-
+      width: {
+        "60p" : "60%",
+        "40p" : "40%",
+      }
 
     },
   },
