@@ -5,11 +5,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities{
-  .inputSignup{
-    @apply border-2 w-64 rounded-md
+@layer utilities {
+  .inputSignup {
+
+    @apply sm:mx-16 p-2 mx-10 border-2 w-[90%] sm:w-32 md:w-[70%] lg:w-60p xl:w-[50%] min-w-[250px] rounded-md
+  }
+
+
+  small {
+    @apply text-sm  md:text-base xl:text-base font-nunito text-wrap
   }
 }
 
 html {background-color: #F4F3F2
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
