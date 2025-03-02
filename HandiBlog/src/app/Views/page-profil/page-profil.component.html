@@ -1,5 +1,20 @@
-<div class="flex flex-col justify-center items-center">
+<div class="hidden md:block xl:block ">
+<div class="flex flex-col justify-center items-center border-2 ">
   @for (profil of profils; track profil) {
-    <app-profil class="w-3/5"></app-profil>
+    <app-profil class="w-3/5" [profil]="profil"></app-profil>
   }
+</div>
+</div>
+<div class=" block md:hidden xl:hidden">
+<div class="flex overflow-x-auto snap-x snap-mandatory space-x-4 scroll-smooth">
+  <div class="flex-none w-screen h-80 bg-blue-300 rounded-md flex items-center justify-center snap-center">
+    <app-profil [profil]="profils[0]"></app-profil>
+  </div>
+  <div class="flex-none w-screen h-80 bg-pink-400 rounded-md flex items-center justify-center snap-center">
+    <app-profil [profil]="profils[1]"></app-profil>
+  </div>
+  <div class="flex-none w-screen h-80 bg-red-300 rounded-md flex items-center justify-center snap-center">
+    <app-profil [profil]="profils[2]"></app-profil>
+  </div>
+</div>
 </div>

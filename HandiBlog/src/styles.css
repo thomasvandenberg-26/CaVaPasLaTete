@@ -22,3 +22,40 @@ html {background-color: #F4F3F2
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  @apply bg-gray-50;
+}
+
+.calendar {
+  @apply bg-white rounded-lg shadow-lg  p-4 border border-gray-200;
+}
+
+.calendar-header {
+  @apply flex justify-between space-x-12 items-center mb-4;
+}
+
+.calendar-grid {
+  @apply grid grid-cols-7 gap-1;
+}
+
+.calendar-day {
+  @apply h-10 w-10 flex items-center justify-center rounded-full cursor-pointer hover:bg-blue-100 transition-colors;
+}
+
+.calendar-day.selected {
+  @apply bg-green text-white hover:bg-bleucanard;
+}
+
+.calendar-day.today {
+  @apply border border-vertvertvert;
+}
+
+.calendar-day.disabled {
+  @apply text-gray-300 cursor-not-allowed hover:bg-transparent;
+}
+
+.weekday-header {
+  @apply text-center text-gray-500 text-sm py-2;
+}

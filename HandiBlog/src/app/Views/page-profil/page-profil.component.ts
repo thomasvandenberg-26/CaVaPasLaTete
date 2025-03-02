@@ -10,5 +10,11 @@ import {ProfilComponent} from '../../Component/profil/profil.component';
 })
 export class PageProfilComponent {
 
-  profils = [1,2,3];
+  profils = [
+    { id: 1, firstName: "Thomas" , lastName: "VAN DEN BERG" , speciality: "Ergothérapeute", description: "Lorem ipsum dolor sit " },
+    { id: 2, firstName: "Alice" , lastName: "Durand", speciality: "Photographe", description: "Lorem ipsum dolor sit " },
+    { id: 3, firstName: "Bob", lastName: "Ciobanu",speciality: "Développeur", description: "Lorem ipsum dolor sit " }
+  ];
+
+
 }
