@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import {ProfilComponent} from '../../Component/profil/profil.component';
+import {DatePickerComponent} from '../../Component/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-page-profil',
   imports: [
-    ProfilComponent
+    ProfilComponent,
+    DatePickerComponent
   ],
   templateUrl: './page-profil.component.html',
 })
