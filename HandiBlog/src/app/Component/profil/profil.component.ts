@@ -1,12 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
-import {DatePickerComponent} from '../date-picker/date-picker.component';
 
 @Component({
   selector: 'app-profil',
   imports: [
     NgOptimizedImage,
-    DatePickerComponent
   ],
   templateUrl: './profil.component.html',
 })

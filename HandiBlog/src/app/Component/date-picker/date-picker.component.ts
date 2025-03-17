@@ -17,7 +17,11 @@ export class DatePickerComponent {
   toggleCalendar() {
     this.isCalendarVisible = !this.isCalendarVisible;
   }
-
+  onBackdropClick(event: MouseEvent) {
+    if ((event.target as HTMLElement).classList.contains('fixed')) {
+      this.isCalendarVisible = false;
+    }
+  }
   onDateSelected(date: Date) {
     this.selectedDate = date;
     this.isCalendarVisible = false;

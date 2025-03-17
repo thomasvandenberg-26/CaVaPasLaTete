@@ -59,3 +59,31 @@ body {
 .weekday-header {
   @apply text-center text-gray-500 text-sm py-2;
 }
+
+/* Styles pour le support mobile */
+@media (max-width: 768px) {
+  .calendar {
+    @apply shadow-xl;
+  }
+
+  .calendar-day {
+    @apply h-11 w-11 text-base;
+  }
+
+  .weekday-header {
+    @apply text-base;
+  }
+}
+
+/* Styles Material Design */
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: white;
+}
+
+.mat-mdc-button {
+  @apply text-blue-600;
+}
+
+.mat-mdc-raised-button {
+  @apply bg-blue-600 text-white;
+}

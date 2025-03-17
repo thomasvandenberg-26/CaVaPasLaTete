@@ -1,11 +1,49 @@
-<h4 mat-dialog-title> Prendre rendez vous</h4>
-<mat-dialog-content>
-  <div class="flex flex-col">
-  <label for="motifConsult">Motif de la consultation</label>
-  <textarea name="" id="motifConsult" cols="30" rows="10" class="mt-3"></textarea>
-  <div class="flex flex-row justify-center space-x-5 mt-5">
-  <button type="submit" class="w-10  " mat-flat-button>18:10</button>
-    <button type="submit" class="w-10 " mat-flat-button>10:00</button>
-   </div>
+<div class="p-6">
+  <h2 class="text-xl font-semibold mb-4">Prendre rendez-vous</h2>
+
+  <div class="flex flex-col space-y-4">
+    <div>
+      <label for="motifConsult" class="block text-sm font-medium text-gray-700 mb-2">
+        Motif de la consultation
+      </label>
+      <textarea
+        id="motifConsult"
+        [(ngModel)]="motif"
+        rows="4"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Décrivez le motif de votre consultation...">
+          </textarea>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-medium text-gray-700 mb-2">Horaires disponibles</h3>
+      <div class="grid grid-cols-3 gap-2">
+        <button
+          *ngFor="let horaire of horaires"
+          (click)="selectHoraire(horaire)"
+          mat-flat-button
+          [color]="selectedHoraire === horaire ? 'primary' : ''"
+          class="p-2">
+          {{ horaire }}
+        </button>
+      </div>
+    </div>
+
+    <div class="flex justify-end space-x-3 pt-4">
+      <button
+        mat-button
+        (click)="fermer()"
+        class="px-4 py-2">
+        Annuler
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="!isValid()"
+        (click)="confirmer()"
+        class="px-4 py-2">
+        Confirmer
+      </button>
+    </div>
   </div>
-</mat-dialog-content>
+</div>
