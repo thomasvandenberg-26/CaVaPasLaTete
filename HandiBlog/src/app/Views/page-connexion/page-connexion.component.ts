@@ -31,7 +31,7 @@ export class PageConnexionComponent {
     this.authService.login(this.formGroup.controls.email.value, this.formGroup.controls.password.value).subscribe((isAuthenticated) => {
       if(isAuthenticated) {
         localStorage.setItem('isAuthenticated','true');
-        this.router.navigate(['/profile']);
+        console.log("Connecté !")
       } else{
         this.errorMessage = 'Email or password is incorrect.';
       }
