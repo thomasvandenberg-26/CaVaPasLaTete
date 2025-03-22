@@ -29,6 +29,13 @@ public class User {
     @Setter
     private String password;
 
+    @Getter
+    @Setter
+    private String specialite;
+
+    @Getter
+    @Setter
+    private String description;
 
     public User( Type type,String prenom , String nom, String email ,String password) {
         this.type = type;

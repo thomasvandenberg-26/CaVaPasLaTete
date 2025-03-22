@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
-
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService  ;
@@ -25,7 +24,6 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestBody User user)
     {
         logger.info("Données reçues : {}", user.getNom() + " " + user.getPrenom() + " " + user.getEmail() + " " + user.getType());
-
         User savedUser = userService.createUser(user);
        return ResponseEntity.ok(savedUser);
     }
@@ -33,5 +31,10 @@ public class UserController {
     public boolean login(@RequestBody User user)
     {
         return userService.authenticate(user.getEmail(), user.getPassword());
+    }
+    @PostMapping("/update")
+    public User updateUserSpecialite(@RequestBody User user)
+    {
+        return userService.userUpdate(user.getEmail(), user.getPassword());
     }
 }
