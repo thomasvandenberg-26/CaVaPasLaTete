@@ -8,7 +8,7 @@
 @layer utilities {
   .inputSignup {
 
-    @apply sm:mx-16 p-2 mx-10 border-2 w-[90%] sm:w-32 md:w-[70%] lg:w-60p xl:w-[50%] min-w-[250px] rounded-md
+    @apply sm:mx-16 border-2 w-[90%] sm:w-32 md:w-[70%] lg:w-60p xl:w-[50%] min-w-[250px] rounded-md
   }
 
 
@@ -22,3 +22,23 @@ html {background-color: #F4F3F2
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.login {
+  .connexionInput {
+    @apply w-64;
+
+  }
+}
+@media (max-width: 768px)
+{
+  .login {
+    @apply w-[95%] rounded-md pt-6 ;
+    .titre {@apply text-2xl}
+        .form{
+          @apply w-full;
+          .pasInscrit{
+            @apply ml-6;
+          }
+        }
+  }
+
+}
