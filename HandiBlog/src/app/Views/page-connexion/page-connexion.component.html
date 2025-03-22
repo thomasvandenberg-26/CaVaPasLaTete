@@ -13,6 +13,8 @@
       <a [routerLink]="['/signup']" class="pasInscrit underline self-start font-primary text-okay hover:text-rouge" > Pas inscrit ?</a>
   </div>
   </form>
-
+  <div *ngIf="errorMessage" class="text-red-500 text-center my-4">
+    {{ errorMessage }}
+  </div>
 </div>
 
