@@ -38,4 +38,9 @@ public class UserService {
         }
         return encoder.matches(password,user.getPassword());
     }
+    public User userUpdate(String email, String specialite)
+    {
+        return userRepository.updateSpecialiteByEmail(email, specialite);
+    }
 }
+
