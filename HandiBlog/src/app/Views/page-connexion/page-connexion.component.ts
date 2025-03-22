@@ -23,8 +23,7 @@ export class PageConnexionComponent {
    formGroup = new FormGroup({
      email : new FormControl('' , {nonNullable: true}),
      password: new FormControl('' , {nonNullable: true}),
-  })
-  successMessage = '';
+  });
   errorMessage = '';
   loginValid: boolean = true;
   constructor(public authService: AuthService, private router: Router) {
@@ -34,7 +33,7 @@ export class PageConnexionComponent {
     this.authService.login(this.formGroup.controls.email.value, this.formGroup.controls.password.value).subscribe((isAuthenticated) => {
       if(isAuthenticated) {
         localStorage.setItem('isAuthenticated','true');
-        this.successMessage = 'Connecté !'
+         console.log("Connecté !");
       } else{
         this.errorMessage = 'Email or password is incorrect.';
 
