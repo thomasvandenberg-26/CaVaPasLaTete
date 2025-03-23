@@ -42,3 +42,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
 }
+.cercle {
+  border-radius: 50%;
+  width: 125px;
+  height: 125px;
+  background-image: url("/assets/images/appareil-photo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid #ccc;
+}
