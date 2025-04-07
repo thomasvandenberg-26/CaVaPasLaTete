@@ -37,4 +37,9 @@ public class UserController {
     {
         return userService.userUpdate(user.getEmail(), user.getPassword());
     }
+    @GetMapping("user/id")
+    public int getUserId(String email)
+    {
+        return userService.getUserId(email);
+    }
 }
