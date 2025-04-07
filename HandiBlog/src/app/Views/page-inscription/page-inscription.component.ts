@@ -99,7 +99,7 @@ checkPassword(pwd: FormControl): void {
 
 
    this.apiService.sendData(formData, '/users/create').subscribe({
-     next: (response) => this.router.navigate(['/login']),
+     next: (response) => this.router.navigate(['/connexion']),
 
      error: (error) => console.error('Error:', error),
    });
