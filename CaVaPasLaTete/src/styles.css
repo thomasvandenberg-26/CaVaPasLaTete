@@ -43,12 +43,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 }
 .cercle {
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
-  width: 125px;
-  height: 125px;
-  background-image: url("/assets/images/appareil-photo.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: 2px solid #ccc;
+  overflow: hidden; /* cache les parties dépassant du cercle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+}
+
+.cercle img {
+  width: 100%;
+  height: 100%; /* s'assure que l'image remplit tout l'espace disponible */
+  object-fit: cover; /* garde les proportions et remplit le cercle */
 }
