@@ -16,4 +16,11 @@ export class ApiService {
   sendData(data: any, url: string): Observable<any> {
     return this.http.post( this.apiUrl+url, data);
   }
+
+  sendDataProfil(data: any, url: string): Observable<any> {
+    return this.http.post(this.apiUrl+url, data);
+  }
+  getUserId(data: any, url: string): Observable<any> {
+    return this.http.get( this.apiUrl+url, data);
+  }
 }
