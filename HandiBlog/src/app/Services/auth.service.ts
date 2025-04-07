@@ -15,4 +15,8 @@ export class AuthService {
     return this.http.post<User>(this.apiUrl, {email, password})
 
   }
+
+  getUserId(email: string) {
+    return this.http.get<User>(this.apiUrl+"url", {params: {email}});
+  }
 }
