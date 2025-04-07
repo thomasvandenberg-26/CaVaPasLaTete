@@ -42,5 +42,9 @@ public class UserService {
     {
         return userRepository.updateSpecialiteByEmail(email, specialite);
     }
+    public int getUserId(String email)
+    {
+        return userRepository.findIdByEmail(email);
+    }
 }
 
