@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "HandiBlog": {
+    "CaVaPasLaTete": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/handi-blog",
+            "outputPath": "dist/ca-va-pas-la-tete",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "HandiBlog:build:production"
+              "buildTarget": "CaVaPasLaTete:build:production"
             },
             "development": {
-              "buildTarget": "HandiBlog:build:development"
+              "buildTarget": "CaVaPasLaTete:build:development"
             }
           },
           "defaultConfiguration": "development"
