@@ -4,6 +4,7 @@ import org.example.handiblog_back.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -16,5 +17,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u.id FROM User u where u.email = :email")
      int findIdByEmail(String email);
+
+    @Query("SELECT u.prenom FROM User u where u.id = :id ")
+     String findUserFirstNameById(@Param("id") int id);
+
+    @Query("SELECT u.nom FROM User u where u.id = :id ")
+    String findUserLastNameById(@Param("id") int id);
+
 
 }

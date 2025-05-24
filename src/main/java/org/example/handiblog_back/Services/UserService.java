@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -29,14 +30,24 @@ public class UserService {
        return savedUser;
     }
 
-    public boolean authenticate(String email, String password)
+    public User authenticate(String email, String password)
     {
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
         User user = userRepository.findUserByEmail(email);
-        if(user == null)
+
+        log.info("test login" + user.getEmail());
+        if(encoder.matches(password,user.getPassword()))
         {
-            return false;
+            savedUser = user;
+            log.info("get nom : " + savedUser.getNom());
+            log.info("mdp: success");
+            
         }
-        return encoder.matches(password,user.getPassword());
+        else {
+            savedUser = null;
+
+        }
+        return savedUser;
     }
     public User userUpdate(String email, String specialite)
     {
