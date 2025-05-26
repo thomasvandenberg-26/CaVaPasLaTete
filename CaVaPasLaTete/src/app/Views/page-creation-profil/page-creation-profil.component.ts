@@ -1,7 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import  {ApiService} from '../../Services/api.service';
 import {Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
+import {User} from '../../Models/User';
 
 
 @Component({
@@ -12,8 +14,12 @@ import {Router} from '@angular/router';
   templateUrl: './page-creation-profil.component.html',
   styleUrl: './page-creation-profil.component.css'
 })
-export class PageCreationProfilComponent {
-constructor(private apiService : ApiService, private router : Router) {
+export class PageCreationProfilComponent implements OnInit{
+
+  userId: number= 0;
+  userFirstName: string = "";
+  userLastName: string = "";
+constructor(private apiService : ApiService, private router : Router, private route: ActivatedRoute) {
 }
   selectedFile: File | null = null;
   imagePreview: string | null= null;
@@ -41,7 +47,32 @@ constructor(private apiService : ApiService, private router : Router) {
       reader.readAsDataURL(file);
     }
   }
+
+  ngOnInit() {
+    console.log("on init creation")
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.userId = +id;
+        console.log("userId :  " + this.userId)
+      }
+    })
+
+    this.apiService.getUserFirstName(this.userId)
+      .subscribe(
+        prenom => {this.userFirstName = this.userFirstName + prenom; }
+      );
+    this.apiService.getUserLastName(this.userId).subscribe(
+      nom=> { this.userLastName = this.userLastName + nom; }
+    )
+    }
+   
+
+
+
+
   onSubmit() {
+
 
     const formData = this.formGroup.value;
 

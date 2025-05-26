@@ -22,7 +22,7 @@ import {NgIf} from '@angular/common';
   styleUrl: './page-connexion.component.css'
 })
 export class PageConnexionComponent {
-  user : User;
+   connectedUser? : User | undefined;
    formGroup = new FormGroup({
      email : new FormControl('' , {nonNullable: true}),
      password: new FormControl('' , {nonNullable: true}),
@@ -30,26 +30,32 @@ export class PageConnexionComponent {
   errorMessage = '';
   loginValid: boolean = true;
   constructor(public authService: AuthService, private router: Router) {
-    this.user = new User(this.formGroup.controls.email.value,this.formGroup.controls.password.value)
+
   }
 
   onLogin() {
-    this.authService.login(this.formGroup.controls.email.value, this.formGroup.controls.password.value).subscribe((isAuthenticated) => {
-      if(isAuthenticated) {
-        localStorage.setItem('isAuthenticated','true');
-        this.router.navigate(['/profile/' + this.authService.getUserId(this.user.email.toString())]);
+    const email = this.formGroup.controls.email.value;
+    const password = this.formGroup.controls.password.value;
+    console.log(email);
+    this.authService.login(email, password).pipe().subscribe(
+      {
+        next: (response) => {
+          if(response && response.id) {
+            console.log("test connexion front end")
+            this.connectedUser = response;
+            this.router.navigate(['creationProfil/user/'
+            + response.id]);
+          }
 
-      } else{
-        this.errorMessage = 'Email or password is incorrect.';
+          else{
 
+          }
+        },
+        error: error => {
+          this.errorMessage = "Email ou mot de passe incorrect";
+        }
       }
+    )}
 
-    },
-      () => {
-      this.errorMessage = 'Erreur lors de la connexion';
-      }
 
-      );
-
-  }
 }

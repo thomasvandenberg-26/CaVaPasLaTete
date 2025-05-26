@@ -6,7 +6,7 @@ import {PageCreationProfilComponent} from './Views/page-creation-profil/page-cre
 
 
 export const routes: Routes = [
-  {path :'signup', component: PageInscriptionComponent},
-  {path :'login', component: PageConnexionComponent},
-  {path :'createProfile', component: PageCreationProfilComponent}
+  {path :'inscription', component: PageInscriptionComponent},
+  {path :'connexion', component: PageConnexionComponent},
+  {path :'creationProfil/user/:id', component: PageCreationProfilComponent}
 ];
