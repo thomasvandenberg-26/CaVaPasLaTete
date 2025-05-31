@@ -41,10 +41,11 @@ export class PageConnexionComponent {
       {
         next: (response) => {
           if(response && response.id) {
-            console.log("test connexion front end")
             this.connectedUser = response;
-            this.router.navigate(['creationProfil/user/'
-            + response.id]);
+            localStorage.setItem("userId", this.connectedUser.id.toString())
+
+            this.router.navigate(['creationProfil/user/']);
+
           }
 
           else{

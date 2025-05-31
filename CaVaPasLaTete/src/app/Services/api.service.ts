@@ -8,7 +8,7 @@ import {User} from '../Models/User';
 export class ApiService {
 
   private headers: Headers = new Headers({ 'Content-Type': 'application/json' , 'Accept': 'application/json'});
-  private apiUrl = 'http://localhost:8080/api/users/'
+  private apiUrl = 'http://localhost:8080/api/users'
   constructor(private http: HttpClient) {
   }
 
@@ -25,11 +25,11 @@ export class ApiService {
   }
   getUserFirstName(data: any)
   {
-    return this.http.get(this.apiUrl + data + "/getFirstName", {responseType: 'text'})
+    return this.http.get(this.apiUrl + "/" + data + "/getFirstName", {responseType: 'text'})
   }
   getUserLastName(data: any)
   {
-    return this.http.get(this.apiUrl + data + "/getLastName", {responseType: 'text'})
+    return this.http.get(this.apiUrl + "/" + data + "/getLastName", {responseType: 'text'})
   }
 
 }

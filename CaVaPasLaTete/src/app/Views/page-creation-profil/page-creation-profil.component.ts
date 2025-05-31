@@ -17,8 +17,9 @@ import {User} from '../../Models/User';
 export class PageCreationProfilComponent implements OnInit{
 
   userId: number= 0;
+  userStorageId: string = "";
   userFirstName: string = "";
-  userLastName: string = "";
+  userLastName: string | null = "";
 constructor(private apiService : ApiService, private router : Router, private route: ActivatedRoute) {
 }
   selectedFile: File | null = null;
@@ -50,23 +51,19 @@ constructor(private apiService : ApiService, private router : Router, private ro
 
   ngOnInit() {
     console.log("on init creation")
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.userId = +id;
-        console.log("userId :  " + this.userId)
-      }
-    })
-
-    this.apiService.getUserFirstName(this.userId)
+    this.userStorageId = this.userStorageId + localStorage.getItem("userId");
+    this.apiService.getUserFirstName(this.userStorageId)
       .subscribe(
         prenom => {this.userFirstName = this.userFirstName + prenom; }
       );
-    this.apiService.getUserLastName(this.userId).subscribe(
+
+    this.apiService.getUserLastName(this.userStorageId)
+      .subscribe(
       nom=> { this.userLastName = this.userLastName + nom; }
     )
-    }
-   
+
+  }
+
 
 
 

@@ -8,5 +8,5 @@ import {PageCreationProfilComponent} from './Views/page-creation-profil/page-cre
 export const routes: Routes = [
   {path :'inscription', component: PageInscriptionComponent},
   {path :'connexion', component: PageConnexionComponent},
-  {path :'creationProfil/user/:id', component: PageCreationProfilComponent}
+  {path :'creationProfil/user', component: PageCreationProfilComponent}
 ];
