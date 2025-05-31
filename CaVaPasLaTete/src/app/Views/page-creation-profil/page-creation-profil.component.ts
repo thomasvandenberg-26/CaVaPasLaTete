@@ -59,7 +59,7 @@ constructor(private apiService : ApiService, private router : Router, private ro
 
     this.apiService.getUserLastName(this.userStorageId)
       .subscribe(
-      nom=> { this.userLastName = this.userLastName + nom; }
+      nom=> { this.userLastName = this.userLastName + nom.toUpperCase(); }
     )
 
   }
