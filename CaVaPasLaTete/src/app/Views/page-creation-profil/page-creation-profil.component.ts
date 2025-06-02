@@ -12,7 +12,6 @@ import {User} from '../../Models/User';
     ReactiveFormsModule
   ],
   templateUrl: './page-creation-profil.component.html',
-  styleUrl: './page-creation-profil.component.css'
 })
 export class PageCreationProfilComponent implements OnInit{
 
