@@ -1,9 +1,9 @@
-package org.example.handiblog_back.Controllers;
+package org.example.CaVaPasLaTete_back.Controllers;
 
 
-import org.example.handiblog_back.Models.User;
-import org.example.handiblog_back.Repository.UserRepository;
-import org.example.handiblog_back.Services.UserService;
+import org.example.CaVaPasLaTete_back.Models.User;
+import org.example.CaVaPasLaTete_back.Repository.UserRepository;
+import org.example.CaVaPasLaTete_back.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

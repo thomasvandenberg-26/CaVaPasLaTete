@@ -1,4 +1,4 @@
-package org.example.handiblog_back;
+package org.example.CaVaPasLaTete_back;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
