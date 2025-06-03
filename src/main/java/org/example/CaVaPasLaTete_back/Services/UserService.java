@@ -1,7 +1,7 @@
-package org.example.handiblog_back.Services;
+package org.example.CaVaPasLaTete_back.Services;
 
-import org.example.handiblog_back.Models.User;
-import org.example.handiblog_back.Repository.UserRepository;
+import org.example.CaVaPasLaTete_back.Models.User;
+import org.example.CaVaPasLaTete_back.Repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

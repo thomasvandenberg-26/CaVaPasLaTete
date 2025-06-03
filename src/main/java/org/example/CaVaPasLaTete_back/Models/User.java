@@ -1,4 +1,4 @@
-package org.example.handiblog_back.Models;
+package org.example.CaVaPasLaTete_back.Models;
 
 import jakarta.persistence.*;
 import lombok.Getter;

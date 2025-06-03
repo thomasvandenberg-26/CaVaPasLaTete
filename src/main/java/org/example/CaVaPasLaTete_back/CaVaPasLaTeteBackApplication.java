@@ -1,13 +1,13 @@
-package org.example.handiblog_back;
+package org.example.CaVaPasLaTete_back;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HandiBlogBackApplication {
+public class CaVaPasLaTeteBackApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HandiBlogBackApplication.class, args);
+        SpringApplication.run(org.example.CaVaPasLaTete_back.CaVaPasLaTeteBackApplication.class, args);
     }
 
 }

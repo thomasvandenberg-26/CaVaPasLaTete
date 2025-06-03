@@ -1,6 +1,6 @@
-package org.example.handiblog_back.Repository;
+package org.example.CaVaPasLaTete_back.Repository;
 
-import org.example.handiblog_back.Models.User;
+import org.example.CaVaPasLaTete_back.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
