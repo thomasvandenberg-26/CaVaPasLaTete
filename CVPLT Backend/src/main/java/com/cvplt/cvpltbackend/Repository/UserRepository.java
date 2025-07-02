@@ -1,6 +1,6 @@
-package org.example.CaVaPasLaTete_back.Repository;
+package com.cvplt.cvpltbackend.Repository;
 
-import org.example.CaVaPasLaTete_back.Models.User;
+import com.cvplt.cvpltbackend.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

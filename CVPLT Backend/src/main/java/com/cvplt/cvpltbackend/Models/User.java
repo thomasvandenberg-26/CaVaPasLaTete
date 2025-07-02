@@ -1,41 +1,28 @@
-package org.example.CaVaPasLaTete_back.Models;
+package com.cvplt.cvpltbackend.Models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
     private long id;
-
     @Enumerated(EnumType.STRING)
-    @Getter
     private Type type;
-    @Getter
     private String prenom;
-
-    @Setter
-    @Getter
     private String nom;
-
-    @Getter
-    @Setter
     private String email;
-
-    @Getter
-    @Setter
     private String password;
-
-    @Getter
-    @Setter
     private String specialite;
-
-    @Getter
-    @Setter
     private String description;
 
     public User( Type type,String prenom , String nom, String email ,String password) {
@@ -45,13 +32,6 @@ public class User {
         this.nom = nom;
         this.password = password;
 
-    }
-
-    public User(){
-
-    }
-
-    public User(String email, String prenom, String nom, String password) {
     }
 
 

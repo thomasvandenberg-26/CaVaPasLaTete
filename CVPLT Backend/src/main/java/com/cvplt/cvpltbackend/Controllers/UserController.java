@@ -1,9 +1,9 @@
-package org.example.CaVaPasLaTete_back.Controllers;
+package com.cvplt.cvpltbackend.Controllers;
 
 
-import org.example.CaVaPasLaTete_back.Models.User;
-import org.example.CaVaPasLaTete_back.Repository.UserRepository;
-import org.example.CaVaPasLaTete_back.Services.UserService;
+import com.cvplt.cvpltbackend.Models.User;
+import com.cvplt.cvpltbackend.Repository.UserRepository;
+import com.cvplt.cvpltbackend.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class UserController {
     {
         logger.info("Données reçues : {}", user.getNom() + " " + user.getPrenom() + " " + user.getEmail() + " " + user.getType());
         User savedUser = userService.createUser(user);
-       return ResponseEntity.ok(savedUser);
+        return ResponseEntity.ok(savedUser);
     }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user)

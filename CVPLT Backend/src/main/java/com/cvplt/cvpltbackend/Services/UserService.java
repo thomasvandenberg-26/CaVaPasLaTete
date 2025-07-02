@@ -1,7 +1,7 @@
-package org.example.CaVaPasLaTete_back.Services;
+package com.cvplt.cvpltbackend.Services;
 
-import org.example.CaVaPasLaTete_back.Models.User;
-import org.example.CaVaPasLaTete_back.Repository.UserRepository;
+import com.cvplt.cvpltbackend.Models.User;
+import com.cvplt.cvpltbackend.Repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

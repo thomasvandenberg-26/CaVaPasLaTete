@@ -1,4 +1,4 @@
-package org.example.CaVaPasLaTete_back;
+package com.cvplt.cvpltbackend;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
