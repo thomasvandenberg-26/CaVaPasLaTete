@@ -1,0 +1,71 @@
+<div class="flex justify-center items-start min-h-screen sm:my-40 sm:mr-10 md:my-0">
+  <div class=" flex flex-row  w-3/4 justify-center align-items:center md:mx-auto xl:mx-auto space-x-4 shadow-md rounded-md border-2 mt-3">
+    <div class="hidden md:flex xl:flex  flex-col w-1/2 text-center justify-center    ">
+      <p class="  font-bold text-2xl ml-14">Pourquoi s'inscrire ? </p>
+      <p class=" text-lg ml-14">Vous pourrez communiquer avec d'autres gens et publier votre profil et des articles</p>
+    </div>
+       <form class="w-1/2 flex flex-col space-y-7  justify-center items-center   p-5  " xmlns="http://www.w3.org/1999/html"   [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+           <select value="" id="typeSelect" class="inputSignup p-2  text-bleubleubleu" formControlName="type" >
+             <option value="">&#45;&#45;Vous êtes un &#45;&#45;</option>
+             <option value="Professionel">Professionel</option>
+             <option value="Particulier">Particulier</option>
+           </select>
+
+
+           <input type="text" name="prenom" id="prenom" formControlName="prenom" class="   inputSignup placeholder:text-bleubleubleu text-lg p-2 "   placeholder="Prenom" [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.prenom)" required>
+           <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.prenom)">
+             Le prenom est requis </small>
+
+           <input type="text" name="nom" id="nom" formControlName="nom" class="inputSignup placeholder:text-bleubleubleu  text-lg p-2 " placeholder="Nom" [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.nom)" required>
+           <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.nom)"> Le nom est requis </small>
+
+           <input type="email" name="email" id="email" formControlName="email" class="inputSignup placeholder:text-bleubleubleu text-lg p-2 " placeholder="Email" [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.email)" required>
+           <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.email)"> L'email est requis </small>
+
+           <input type="password" #password (input)=checkPassword(formGroup.controls.password) id="password" formControlName="password" class=" inputSignup placeholder:text-bleubleubleu   text-lg p-2 " [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.password)" placeholder="Mot de passe">
+
+           <small *ngIf="formGroup.get('password')?.touched && formGroup.controls.password.hasError('required')" >
+             Le mot de passe est requis
+           </small>
+           <small *ngIf="formGroup.controls.password.hasError('minlength')">
+             Le mot de passe doit contenir 8 caracteres
+           </small>
+
+           <input type="password" name="motPasse2" id="motPasse2" formControlName="password2" class=" inputSignup placeholder:text-bleubleubleu text-lg p-2" placeholder="Confirmez le Mot de passe"
+                  [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.password2)">
+
+           <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.password2)"> Le 2nd mot de passe est requis </small>
+           <small class="text-danger" *ngIf="formGroup?.errors?.['mismatch']"> Les mots de passes doivent être identiques</small>
+
+           <div class=" flex flex-col  space-y-4  mt-7 items-center text-rouge text-base">
+             <small #minuscule > au moins une minuscule</small>
+             <small #majuscule > au moins une majuscule</small>
+             <small #chiffre> au moins un chiffre </small>
+             <small #speciaux> au moins un des caracteres speciaux ! : / ; . , ?</small>
+           </div>
+
+           <button type="submit" id="valider" class=" bg-bleubleu w-40 self-center  text-xl text-bleucanard  rounded-xl"> Valider</button>
+
+   <!--      &lt;!&ndash;
+         getRawValue nonNullable
+
+         regex ^(?=.*[A-Z])
+
+         (?=.*[a-z])
+         (?=.*\d)
+         (?=.*[!:\/;.,?])
+         [A-Za-z\d!:\/;.,?]{8,}$
+
+
+
+
+         &ndash;&gt;-->
+
+       </form>
+     </div>
+  </div>
+
+
+
+
