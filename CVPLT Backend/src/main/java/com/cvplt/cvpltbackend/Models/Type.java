@@ -1,4 +1,4 @@
-package org.example.CaVaPasLaTete_back.Models;
+package com.cvplt.cvpltbackend.Models;
 
 public enum Type {
     Particulier,
