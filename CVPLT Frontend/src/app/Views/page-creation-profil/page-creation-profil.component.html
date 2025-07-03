@@ -1,0 +1,54 @@
+<div class="flex flex-col justify-center items-center mx-auto rounded-md shadow-xl w-full max-w-xl pt-6 mt-6">
+ <h1 class="text-3xl font-bold text-green mb-4"> Creez votre profil</h1>
+  <div class="flex flex-row space-x-6 mb-4">
+    <div class="flex flex-col">
+      <span class="font-bold text-base">Prenom</span>
+      <span class="text-xl"> {{userFirstName}} </span>
+    </div>
+    <div class="flex flex-col">
+      <span class="font-bold text-base">Nom</span>
+      <span class="text-xl">{{userLastName}}</span>
+    </div>
+  </div>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="mb-4">
+    <div class="flex flex-row">
+      <div class="flex flex-col space-y-4">
+
+        <h1 class="self-center text-xl">Photo de Profil</h1>
+        <input type="file"
+               hidden
+               #fileInput
+               accept="image/*"
+               class="hidden"
+               formControlName="photoProfil"
+              (change)="handleImageUpload($event)"
+        >
+
+        <button #cercle type="button" class="cercle self-center" (click)="fileInput.click()" role="button" aria-label="changer la photo">
+
+          @if (imagePreview) {
+
+            <img [src]="imagePreview" alt="Image chargée" />
+          }
+          @else {
+            <img [src]="initialPicture" alt="photo">
+          }
+        </button>
+
+
+        <!-- Bouton stylisé
+        <button #cercle type="button" class="self-center" (click)="fileInput.click()">
+          <div class="cercle" id="select-file-button"></div>
+        </button>
+        -->
+        <label for="specialite" >Spécialité (Ex : Ergothérapeute, Psychologue, Orthophoniste)</label>
+        <input class="rounded-md" type="text" name="specialite" id="specialite" formControlName="specialite">
+        <label for="localite" >Localité (Région ou Departement)</label>
+        <input class="rounded-md" type="text" name="localite" id="localite" formControlName="localite">
+        <label for="description">Description (Breve description de qui vous êtes , qu'est-ce que vous faites)</label>
+        <textarea name="" id="description" cols="30" rows="7" formControlName="description"></textarea>
+        <button class="self-center bg-bleubleu hover:bg-bleucanard w-36 rounded-xl text-white px-4 " type="submit">Valider</button>
+      </div>
+    </div>
+  </form>
+</div>
