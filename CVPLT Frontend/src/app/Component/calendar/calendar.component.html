@@ -1,0 +1,28 @@
+<div class="calendar md:w-72 xl:w-72 " *ngIf="isVisible" >
+  <div class="calendar-header">
+    <button class="text-gray-600 hover:text-gray-800" (click)="prevMonth()">
+      &lt;
+    </button>
+    <div class="text-lg font-semibold">
+      {{ currentDate | date:'MMMM yyyy' }}
+    </div>
+    <button class="text-gray-600 hover:text-gray-800" (click)="nextMonth()">
+      &gt;
+    </button>
+  </div>
+
+  <div class="calendar-grid">
+    <div class="weekday-header" *ngFor="let day of weekDays">{{ day }}</div>
+
+    <div
+      *ngFor="let day of calendarDays"
+      class="calendar-day"
+      [class.disabled]="!day.inMonth"
+      [class.selected]="isSelected(day.date)"
+      [class.today]="isToday(day.date)"
+      (click)="selectDate(day)">
+      {{ day.date.getDate() }}
+    </div>
+  </div>
+</div>
+
