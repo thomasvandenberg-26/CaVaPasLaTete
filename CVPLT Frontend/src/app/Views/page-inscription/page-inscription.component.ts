@@ -3,7 +3,6 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {ApiService} from '../../Services/api.service';
-import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 @Component({
@@ -19,6 +18,7 @@ export class PageInscriptionComponent {
   @ViewChild('chiffre') chiffre!: ElementRef;
   @ViewChild('speciaux') speciaux!: ElementRef;
 
+  passwordFocused: boolean = false;
 
   constructor(private apiService: ApiService,  private router: Router) {
   }
@@ -27,15 +27,31 @@ export class PageInscriptionComponent {
    type: new FormControl('',{nonNullable: true}),
    prenom: new FormControl('',{nonNullable: true}),
    nom: new FormControl('',{nonNullable: true}),
-   email: new FormControl('',{nonNullable: true}),
+   email: new FormControl('',[Validators.required, Validators.email]),
    password: new FormControl('',[Validators.required,Validators.minLength(8)]),
-   password2: new FormControl('',[Validators.required] ),
+   password2: new FormControl('',[Validators.required, Validators.minLength(1)] ),
  },
    {
      validators: this.passwordMatchValidator,
    }
  );
+  get passwordControl(){
+    return this.formGroup.controls.password;
+  }
+  get password2Control()
+  {
+    return this.formGroup.controls.password2;
+  }
 
+  isOnlySpace(formControl: FormControl | null | undefined): boolean {
+    const value = formControl?.value;
+    if(value == null || value === '') return false;
+    return typeof value === 'string' && value.trim() === '';
+  }
+ isTouchedOrDirty(formControl: FormControl)
+ {
+   return formControl.touched || formControl.dirty;
+ }
  isInvalidAndTouchedOrDirty(formControl: FormControl)
  {
    return formControl.invalid && (formControl.touched || formControl.dirty);
@@ -99,8 +115,7 @@ checkPassword(pwd: FormControl): void {
 
 
    this.apiService.sendData(formData, '/create').subscribe({
-     next: (response) => this.router.navigate(['/connexion']),
-
+     next: () => this.router.navigate(['/connexion']),
      error: (error) => console.error('Error:', error),
    });
  }
