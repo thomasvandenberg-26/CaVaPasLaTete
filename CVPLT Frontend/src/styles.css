@@ -8,7 +8,7 @@
 @layer utilities {
   .inputSignup {
 
-    @apply sm:mx-16 border-2 w-[90%] sm:w-32 md:w-[70%] lg:w-60p xl:w-[50%] min-w-[250px] rounded-md
+    @apply sm:mx-16 border-2 sm:w-32 md:w-[80%] lg:w-60p xl:w-[60%] min-w-[250px] rounded-md
   }
 
 

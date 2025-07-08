@@ -1,10 +1,10 @@
 <div class="flex justify-center items-start min-h-screen sm:my-40 sm:mr-10 md:my-0">
-  <div class=" flex flex-row  w-3/4 justify-center align-items:center md:mx-auto xl:mx-auto space-x-4 shadow-md rounded-md border-2 mt-3">
-    <div class="hidden md:flex xl:flex  flex-col w-1/2 text-center justify-center    ">
+  <div class="  flex flex-row  w-3/4 justify-center align-items:center md:mx-auto xl:mx-auto space-x-4 shadow-md rounded-md border-2 mt-3">
+    <div class="w-3/5   hidden md:flex xl:flex  flex-col  text-center justify-center    ">
       <p class="  font-bold text-2xl ml-14">Pourquoi s'inscrire ? </p>
       <p class=" text-lg ml-14">Vous pourrez communiquer avec d'autres gens et publier votre profil et des articles</p>
     </div>
-    <form class="w-1/2 flex flex-col space-y-7  justify-center items-center   p-5  "
+    <form class=" md:w-2/5 xl:w-2/5 flex flex-col space-y-7  justify-center items-center   p-5  "
           [formGroup]="formGroup"
           (ngSubmit)="onSubmit()">
 
@@ -17,20 +17,20 @@
 
 
       <input type="text" formControlName="prenom" class="inputSignup placeholder:text-bleubleubleu text-lg p-2 "   placeholder="Prenom" [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.prenom)" required>
-      <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.prenom)">
+      <small class="" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.prenom)">
         Le prénom est requis </small>
 
       <input type="text" formControlName="nom" class="inputSignup placeholder:text-bleubleubleu  text-lg p-2 " placeholder="Nom" [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.nom)" required>
-      <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.nom)"> Le nom est requis </small>
+      <small class="" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.nom)"> Le nom est requis </small>
 
       <input type="email" formControlName="email" class="inputSignup
-           placeholder:text-bleubleubleu text-lg p-2 "
+           placeholder:text-bleubleubleu text-lg p-2  "
              placeholder="Email"
              [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.email)" required>
-      <small class="text-danger"
+      <small class=""
              *ngIf="formGroup.controls.email.errors?.['required'] && isTouchedOrDirty(formGroup.controls.email)">
         L'email est requis </small>
-      <small class="text-danger"
+      <small class=""
              *ngIf="formGroup.controls.email.errors?.['email'] && isTouchedOrDirty(formGroup.controls.email)"> L'email n'est pas valide
       </small>
 
@@ -43,7 +43,7 @@
       <small *ngIf=" passwordControl.errors?.['required'] && isTouchedOrDirty(passwordControl)" >
         Le mot de passe est requis
       </small>
-      <small *ngIf=" passwordControl.errors?.['minlength'] && isTouchedOrDirty(passwordControl)">
+      <small class="text-center" *ngIf=" passwordControl.errors?.['minlength'] && isTouchedOrDirty(passwordControl)">
         Le mot de passe doit contenir 8 caractères
       </small>
 
@@ -53,16 +53,16 @@
              [class.is-invalid]="isInvalidAndTouchedOrDirty(password2Control)">
 
       <small
-        class="text-danger"
+        class=" text-center"
         *ngIf="
              isInvalidAndTouchedOrDirty(password2Control)
              && !isOnlySpace(password2Control)">
         Le 2nd mot de passe est requis </small>
 
-      <small class="text-danger" *ngIf=" isTouchedOrDirty(password2Control) && isOnlySpace(password2Control)"> Le mot de passe ne peut contenir que des espaces</small>
+      <small class=" text-center" *ngIf=" isTouchedOrDirty(password2Control) && isOnlySpace(password2Control)"> Le mot de passe ne peut contenir que des espaces</small>
 
       <!-- password2Control check variable et password2Control.value check valeur (ni null ni non défini) , trim check s'il n ya pas que des espaces ou juste vide-->
-      <small class="text-danger" *ngIf=" formGroup?.errors?.['mismatch'] && isTouchedOrDirty(password2Control)"> Les mots de passes doivent être identiques</small>
+      <small class=" text-center" *ngIf=" formGroup?.errors?.['mismatch'] && isTouchedOrDirty(password2Control)"> Les mots de passes doivent être identiques</small>
 
       <div *ngIf="passwordFocused" class=" flex flex-col  space-y-4  mt-7 items-center text-rouge text-base">
         <small #minuscule > au moins une minuscule</small>
