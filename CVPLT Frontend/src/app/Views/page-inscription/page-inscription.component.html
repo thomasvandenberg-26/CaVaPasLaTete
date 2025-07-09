@@ -70,8 +70,7 @@
         <small #chiffre> au moins un chiffre </small>
         <small #speciaux> au moins un des caracteres speciaux ! : / ; . , ?</small>
       </div>
-
-      <button type="submit" id="valider" class=" bg-bleubleu w-40 self-center  text-xl text-bleucanard  rounded-xl"> Valider</button>
+      <btnValiderFormulaire [formGroup]="formGroup"></btnValiderFormulaire>
 
       <!--      &lt;!&ndash;
             getRawValue nonNullable

@@ -4,23 +4,25 @@ import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators
 import {NgIf} from '@angular/common';
 import {ApiService} from '../../Services/api.service';
 import {Router} from '@angular/router';
+import {boutonValiderFormulaire} from '../../Component/boutonValiderFormulaire/boutonValiderFormulaire';
+
 
 @Component({
   selector: 'app-page-inscription',
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, boutonValiderFormulaire],
   standalone: true,
   templateUrl: './page-inscription.component.html',
   styleUrl: './page-inscription.component.css'
 })
-export class PageInscriptionComponent {
+export class PageInscriptionComponent{
   @ViewChild('minuscule') minuscule!: ElementRef;
   @ViewChild('majuscule') majuscule!: ElementRef;
   @ViewChild('chiffre') chiffre!: ElementRef;
   @ViewChild('speciaux') speciaux!: ElementRef;
-
+  @ViewChild('btn') btnValiderFormulaire!: ElementRef<HTMLButtonElement>;
   passwordFocused: boolean = false;
 
-  constructor(private apiService: ApiService,  private router: Router) {
+  constructor(private apiService: ApiService,  private router: Router ) {
   }
  formGroup = new FormGroup(
    {
@@ -119,4 +121,6 @@ checkPassword(pwd: FormControl): void {
      error: (error) => console.error('Error:', error),
    });
  }
+
+
 }
