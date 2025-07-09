@@ -1,7 +1,7 @@
 
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {NgIf} from '@angular/common';
+import {NgIf, NgOptimizedImage} from '@angular/common';
 import {ApiService} from '../../Services/api.service';
 import {Router} from '@angular/router';
 import {boutonValiderFormulaire} from '../../Component/boutonValiderFormulaire/boutonValiderFormulaire';
@@ -9,7 +9,7 @@ import {boutonValiderFormulaire} from '../../Component/boutonValiderFormulaire/b
 
 @Component({
   selector: 'app-page-inscription',
-  imports: [ReactiveFormsModule, NgIf, boutonValiderFormulaire],
+  imports: [ReactiveFormsModule, NgIf, boutonValiderFormulaire, NgOptimizedImage],
   standalone: true,
   templateUrl: './page-inscription.component.html',
   styleUrl: './page-inscription.component.css'
