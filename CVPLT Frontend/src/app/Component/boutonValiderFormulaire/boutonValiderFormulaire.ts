@@ -20,10 +20,14 @@ export class boutonValiderFormulaire implements OnInit {
         if(this.formGroup.valid) {
           this.changeBackgroundColor(this.btn.nativeElement, '#82C3C5');
         }
+        else{
+          this.changeBackgroundColor(this.btn.nativeElement, "rgb(209,213,219)" )
+        }
       });
     }
 
   changeBackgroundColor(element: HTMLButtonElement, color: string): void {
     element.style.backgroundColor = color;
+
   }
 }
