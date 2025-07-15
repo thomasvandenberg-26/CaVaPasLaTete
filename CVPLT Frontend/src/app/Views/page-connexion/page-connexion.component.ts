@@ -1,19 +1,17 @@
 import { Component } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import {ApiService} from '../../Services/api.service';
-import {PageInscriptionComponent} from '../page-inscription/page-inscription.component';
-import {Routes} from '@angular/router';
 import {User} from '../../Models/User';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FormGroup} from '@angular/forms';
 import {AuthService} from '../../Services/auth.service';
 import {NgIf} from '@angular/common';
-
+import {boutonValiderFormulaire} from '../../Component/boutonValiderFormulaire/boutonValiderFormulaire';
 
 
 @Component({
   selector: 'app-page-connexion',
   imports: [
+    boutonValiderFormulaire,
     RouterLink,
     ReactiveFormsModule,
     NgIf
@@ -24,11 +22,10 @@ import {NgIf} from '@angular/common';
 export class PageConnexionComponent {
    connectedUser? : User | undefined;
    formGroup = new FormGroup({
-     email : new FormControl('' , {nonNullable: true}),
-     password: new FormControl('' , {nonNullable: true}),
+     email: new FormControl('',[Validators.required],),
+     password: new FormControl('' ,[Validators.required, Validators.minLength(8)] ),
   });
   errorMessage = '';
-  loginValid: boolean = true;
   constructor(public authService: AuthService, private router: Router) {
 
   }
@@ -37,26 +34,31 @@ export class PageConnexionComponent {
     const email = this.formGroup.controls.email.value;
     const password = this.formGroup.controls.password.value;
     console.log(email);
-    this.authService.login(email, password).pipe().subscribe(
-      {
-        next: (response) => {
-          if(response && response.id) {
-            this.connectedUser = response;
-            localStorage.setItem("userId", this.connectedUser.id.toString())
+    if (email != null && password != null) {
+      this.authService.login(email, password).pipe().subscribe(
+        {
+          next: (response) => {
+            if (response && response.id) {
+              this.connectedUser = response;
+              localStorage.setItem("userId", this.connectedUser.id.toString())
 
-            this.router.navigate(['creationProfil/user/']);
+              this.router.navigate(['creationProfil/user/']);
 
+            } else {
+
+            }
+          },
+          error: error => {
+            this.errorMessage = "Email ou mot de passe incorrect";
           }
-
-          else{
-
-          }
-        },
-        error: error => {
-          this.errorMessage = "Email ou mot de passe incorrect";
         }
-      }
-    )}
+      )
+    }
+  }
+    isInvalidAndTouchedOrDirty(formControl: FormControl)
+    {
+      return formControl.invalid && (formControl.dirty || formControl.touched)
+    }
 
 
 }

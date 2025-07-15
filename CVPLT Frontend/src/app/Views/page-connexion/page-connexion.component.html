@@ -6,11 +6,12 @@
     <div class="flex flex-col items-center space-y-8 my-7 ">
 
         <input type="email" placeholder="Email" formControlName="email" class=" connexionInput focus:outline-green-700  p-2">
+        <small *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.email)"> L'email est requis</small>
 
        <input type="password" placeholder="Mot de passe" formControlName="password" class= "connexionInput focus:outline-green-700 p-2">
-
-      <button type="submit" id="valider" class="bg-green w-36  text-xl text-white rounded-xl"> Valider</button>
-      <a [routerLink]="['/signup']" class="pasInscrit underline self-start font-primary text-okay hover:text-rouge" > Pas inscrit ?</a>
+       <small *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.password)">Le mot de passe est requis</small>
+      <btnValiderFormulaire [formGroup]="formGroup" type="submit" id="valider" class="w-36  text-xl text-white rounded-xl"> Valider</btnValiderFormulaire>
+      <a [routerLink]="['/inscription']" class="pasInscrit underline self-start font-primary text-okay hover:text-rouge" > Pas inscrit ?</a>
   </div>
   </form>
   <div *ngIf="errorMessage" class="text-red-500 text-center my-4">
