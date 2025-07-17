@@ -1,15 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import  {ApiService} from '../../Services/api.service';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import {User} from '../../Models/User';
+import {NgIf} from '@angular/common';
 
 
 @Component({
   selector: 'app-page-creation-profil',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './page-creation-profil.component.html',
 })
@@ -19,6 +21,10 @@ export class PageCreationProfilComponent implements OnInit{
   userStorageId: string = "";
   userFirstName: string = "";
   userLastName: string | null = "";
+  userType!: string;
+
+ Q1Label! : string;
+ Q1Input! : string;
 constructor(private apiService : ApiService, private router : Router, private route: ActivatedRoute) {
 }
   selectedFile: File | null = null;
@@ -29,7 +35,7 @@ constructor(private apiService : ApiService, private router : Router, private ro
 
   formGroup = new FormGroup({
     photoProfil: new FormControl('', {nonNullable: true}),
-    specialite: new FormControl('', {nonNullable: true}),
+    Q1: new FormControl('', {nonNullable: true}),
     localite: new FormControl('', {nonNullable: true}),
     description: new FormControl('', {nonNullable: true}),
   })
@@ -53,25 +59,24 @@ constructor(private apiService : ApiService, private router : Router, private ro
     this.userStorageId = this.userStorageId + localStorage.getItem("userId");
     this.apiService.getUserFirstName(this.userStorageId)
       .subscribe(
-        prenom => {this.userFirstName = this.userFirstName + prenom; }
+        prenom => {this.userFirstName =  prenom; }
       );
 
     this.apiService.getUserLastName(this.userStorageId)
       .subscribe(
-      nom=> { this.userLastName = this.userLastName + nom.toUpperCase(); }
+      nom=> { this.userLastName =  nom.toUpperCase(); }
     )
 
+    this.apiService.getUserType(this.userStorageId)
+      .subscribe(
+        type => {
+          this.userType = type.toUpperCase();
+        }
+      )
   }
-
-
-
-
-
   onSubmit() {
 
-
     const formData = this.formGroup.value;
-
     this.apiService.sendDataProfil(formData,"users/profile" ).subscribe(
       {
         next : (response) => this.router.navigate(['/profile']),
@@ -80,4 +85,5 @@ constructor(private apiService : ApiService, private router : Router, private ro
 
     )
   }
+
 }

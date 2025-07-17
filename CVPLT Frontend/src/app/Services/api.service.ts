@@ -31,5 +31,9 @@ export class ApiService {
   {
     return this.http.get(this.apiUrl + "/" + data + "/getLastName", {responseType: 'text'})
   }
-
+  getUserType(data: any)
+  {
+    return this.http.get(this.apiUrl + "/" + data + "/getType", {responseType: 'text'})
+  }
 }
+
