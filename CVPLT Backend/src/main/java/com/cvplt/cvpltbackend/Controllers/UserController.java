@@ -62,4 +62,12 @@ public class UserController {
     {
         return userRepository.findUserLastNameById(id);
     }
+    @GetMapping("{id}/getType")
+    public String getUserType(@PathVariable int id ) {
+
+        logger.info("test backend getUserType id : {}", id);
+        logger.info(userRepository.findUserTypeById(id));
+        return userRepository.findUserTypeById(id);
+    }
+
 }

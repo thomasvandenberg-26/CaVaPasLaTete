@@ -36,15 +36,31 @@
 
         <label *ngIf="userType ==='PROFESSIONEL'">Spécialité (Ergothérapeute, Psychologue, Thérapeute) </label>
         <label *ngIf="userType ==='PARTICULIER'">Problémes de vie difficile </label>
+        <div *ngIf="userType ==='PARTICULIER'" class="space-x-4">
+          <input type="checkbox" name="p" id="p1" value="Anxiété , Stress">
+          <label class="ml-2" for="p1">Anxiété Stress</label>
+          <input type="checkbox" name="p" id="p2" value="Isolement Social">
+          <label class="ml-2" for="p2">Isolement Social</label>
+          <input type="checkbox" name="p" id="p3" value="Travail">
+          <label class="ml-2" for="p3">Travail</label>
+          <input type="checkbox" name="p" id="p4" value="Dépression">
+          <label for="p4">Dépression</label>
+          <input type="checkbox" name="p" id="p5" value="Sommeil">
+          <label for="p5">Sommeil</label>
+          <input type="checkbox" name="p" id="p6" value="Accès aux soins">
+          <label for="p6">Accès aux Soins</label>
+          <input type="checkbox" name="p" id="p7" value="Relations familiales, amicales">
+          <label for="p7">Relations familiales, amicales</label>
+        </div>
         <input  class="rounded-md" type="text" formControlName ="Q1">
 
         <label for="localite" >Localité (Région ou Departement)</label>
         <input class="rounded-md" type="text" name="localite" id="localite" formControlName="localite">
 
-        <label *ngIf="userType ==='PROFESSIONEL'" for="description">Description (Breve description de qui vous êtes ,
+        <label *ngIf="userType ==='PROFESSIONEL'" for="description">Description (Brève description de qui vous êtes ,
           qu'est-ce que vous faites dans votre métier)</label>
-        <label *ngIf="userType ==='PARTICULIER'" for="description">Description (Breve description de qui vous êtes ,
-          qu'est-ce que vous faites dans votre vie ( études , travail)</label>
+        <label *ngIf="userType ==='PARTICULIER'" for="description">Description (Brève description de qui vous êtes ,
+          qu'est-ce que vous faites dans votre vie ( études , travail, loisirs)</label>
         <textarea name="" id="description" cols="30" rows="7" formControlName="description"></textarea>
 
         <button class="self-center bg-bleubleu hover:bg-bleucanard w-36 rounded-xl text-white px-4 " type="submit">Valider</button>
