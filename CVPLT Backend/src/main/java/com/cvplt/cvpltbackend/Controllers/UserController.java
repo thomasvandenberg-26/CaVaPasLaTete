@@ -4,6 +4,7 @@ package com.cvplt.cvpltbackend.Controllers;
 import com.cvplt.cvpltbackend.Models.User;
 import com.cvplt.cvpltbackend.Repository.UserRepository;
 import com.cvplt.cvpltbackend.Services.UserService;
+import com.cvplt.cvpltbackend.UserDto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,10 +42,12 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou mot de passe incorrect");
         }
     }
-    @PostMapping("/update")
-    public User updateUserSpecialite(@RequestBody User user)
+    @PatchMapping("/update/{id}")
+    public ResponseEntity updateUserSpecialite(@PathVariable Long id, UserDto userDto)
     {
-        return userService.userUpdate(user.getEmail(), user.getPassword());
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+        user.setSpecialite(userDto.getSpecialite());
+        return ResponseEntity.ok("speciality saved");
     }
     @GetMapping("user/id")
     public int getUserId(String email)
