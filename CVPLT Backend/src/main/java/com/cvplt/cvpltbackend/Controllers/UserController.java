@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -45,8 +47,13 @@ public class UserController {
     @PatchMapping("/update/{id}")
     public ResponseEntity updateUserSpecialite(@PathVariable Long id, UserDto userDto)
     {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
-        user.setSpecialite(userDto.getSpecialite());
+        Optional<User> user = userRepository.findById(id);
+        if(user.isEmpty())
+        {
+            return ResponseEntity.notFound().build();
+        }
+        //ResponseEntity.notFound("le nom d'utilisateur ou le mot de passe est incorrect");
+       // user.setSpecialite(userDto.getSpecialite());
         return ResponseEntity.ok("speciality saved");
     }
     @GetMapping("user/id")
