@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Transactional
     @Query("UPDATE User u SET u.specialite = :specialite WHERE u.email = :email")
-    User updateSpecialiteByEmail(String email, String specialite);
+    void updateSpecialiteByEmail(String email, String specialite);
 
     @Query("SELECT u.id FROM User u where u.email = :email")
      int findIdByEmail(String email);
