@@ -44,15 +44,16 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou mot de passe incorrect");
         }
     }
-    @PatchMapping("/update/{id}")
-    public ResponseEntity updateUserSpecialite(@PathVariable Long id, UserDto userDto)
+    @PatchMapping("/update/")
+    public ResponseEntity updateUserSpecialite(@RequestBody User pUser)
     {
-        Optional<User> user = userRepository.findById(id);
+        Optional<User> user = Optional.ofNullable(userRepository.findUserByEmail(pUser.getEmail()));
         if(user.isEmpty())
         {
             return ResponseEntity.notFound().build();
         }
         //ResponseEntity.notFound("le nom d'utilisateur ou le mot de passe est incorrect");
+            userRepository.updateSpecialiteByEmail(pUser.getEmail(),pUser.getSpecialite());
        // user.setSpecialite(userDto.getSpecialite());
         return ResponseEntity.ok("speciality saved");
     }
