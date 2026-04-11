@@ -4,10 +4,11 @@ package com.cvplt.cvpltbackend.Controllers;
 import com.cvplt.cvpltbackend.Models.User;
 import com.cvplt.cvpltbackend.Repository.UserRepository;
 import com.cvplt.cvpltbackend.Services.UserService;
-import com.cvplt.cvpltbackend.UserDto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +20,16 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
+// ajouter plusieurs endpoints entre l'utilisateur que j'ai créer dans
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    @Autowired
+
     private UserService userService  ;
-    @Autowired
     private UserRepository userRepository;
+
+    public UserController(UserService userService, UserRepository userRepository) {
+        this.userService = userService;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<User> registerUser(@RequestBody User user)
@@ -33,6 +39,7 @@ public class UserController {
         return ResponseEntity.ok(savedUser);
     }
     @PostMapping("/login")
+
     public ResponseEntity<?> login(@RequestBody User user)
     { logger.info("backend test login " + user.getEmail());
         User connectedUser = userService.authenticate(user.getEmail(), user.getPassword());
@@ -45,17 +52,41 @@ public class UserController {
         }
     }
     @PatchMapping("/update/")
-    public ResponseEntity updateUserSpecialite(@RequestBody User pUser)
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity updateUserProperties(@RequestBody User pUser)
     {
-        Optional<User> user = Optional.ofNullable(userRepository.findUserByEmail(pUser.getEmail()));
+
+        Optional<User> user = Optional.ofNullable(userRepository.findUserById(pUser.getId()));
         if(user.isEmpty())
         {
             return ResponseEntity.notFound().build();
         }
-        //ResponseEntity.notFound("le nom d'utilisateur ou le mot de passe est incorrect");
-            userRepository.updateSpecialiteByEmail(pUser.getEmail(),pUser.getSpecialite());
-       // user.setSpecialite(userDto.getSpecialite());
-        return ResponseEntity.ok("speciality saved");
+
+        // Quels modifications faire
+        User userExisteDeja = user.get();
+        String propertiesModifie = "l'utilisateur id : " + pUser.getId() + " a bien été modifié : ";
+        if (pUser.getNom() != null && !pUser.getNom().isEmpty())
+        {
+            userExisteDeja.setNom(pUser.getNom());
+           propertiesModifie += "nom, ";
+        }
+        if (pUser.getPrenom() != null && !pUser.getPrenom().isEmpty())
+        {
+            userExisteDeja.setPrenom(pUser.getPrenom());
+            propertiesModifie += "prenom, ";
+        }
+        if (pUser.getEmail() != null && !pUser.getEmail().isEmpty()){
+            userExisteDeja.setEmail(pUser.getEmail());
+            propertiesModifie += "email, ";
+        }
+        if (pUser.getSpecialite() != null && !pUser.getSpecialite().isEmpty()){
+            userExisteDeja.setSpecialite(pUser.getSpecialite());
+            propertiesModifie += "specialite, ";
+
+        }
+        userRepository.save(userExisteDeja);
+
+        return ResponseEntity.ok(propertiesModifie);
     }
     @GetMapping("user/id")
     public int getUserId(String email)

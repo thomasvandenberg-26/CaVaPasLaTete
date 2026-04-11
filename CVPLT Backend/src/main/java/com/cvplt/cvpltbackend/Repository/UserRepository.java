@@ -25,4 +25,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     String findUserLastNameById(@Param("id") int id);
 
 
+    User findUserById(@Param("id") long id);
+
 }
