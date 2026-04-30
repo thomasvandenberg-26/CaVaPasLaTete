@@ -88,8 +88,8 @@ public class UserController {
 
         return ResponseEntity.ok(propertiesModifie);
     }
-    @GetMapping("user/id")
-    public int getUserId(String email)
+    @GetMapping("user/{email}")
+    public int getUserId(@PathVariable String email)
     {
         return userService.getUserId(email);
     }
