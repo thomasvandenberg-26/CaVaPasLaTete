@@ -16,7 +16,7 @@ import {User} from '../../Models/User';
 export class PageCreationProfilComponent implements OnInit{
 
   userId: number= 0;
-  userStorageId: string = "";
+  userStorageId: number = 0;
   userFirstName: string = "";
   userLastName: string | null = "";
 constructor(private apiService : ApiService, private router : Router, private route: ActivatedRoute) {
@@ -50,7 +50,7 @@ constructor(private apiService : ApiService, private router : Router, private ro
 
   ngOnInit() {
     console.log("on init creation")
-    this.userStorageId = this.userStorageId + localStorage.getItem("userId");
+
     this.apiService.getUserFirstName(this.userStorageId)
       .subscribe(
         prenom => {this.userFirstName = this.userFirstName + prenom; }
@@ -72,7 +72,7 @@ constructor(private apiService : ApiService, private router : Router, private ro
 
     const formData = this.formGroup.value;
 
-    this.apiService.sendDataProfil(formData,"users/profile" ).subscribe(
+    this.apiService.sendData(formData,"users/profile" ).subscribe(
       {
         next : (response) => this.router.navigate(['/profile']),
         error : (error) => console.error('Error:', error),

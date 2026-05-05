@@ -116,7 +116,7 @@ checkPassword(pwd: FormControl): void {
    const formData = this.formGroup.value;
 
 
-   this.apiService.sendData(formData, '/create').subscribe({
+   this.apiService.register(formData).subscribe({
      next: () => this.router.navigate(['/connexion']),
      error: (error) => console.error('Error:', error),
    });

@@ -3,7 +3,7 @@ import {Router, RouterLink} from '@angular/router';
 import {User} from '../../Models/User';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {FormGroup} from '@angular/forms';
-import {AuthService} from '../../Services/auth.service';
+import {ApiService} from '../../Services/api.service';
 import {NgIf} from '@angular/common';
 import {boutonValiderFormulaire} from '../../Component/boutonValiderFormulaire/boutonValiderFormulaire';
 
@@ -26,7 +26,7 @@ export class PageConnexionComponent {
      password: new FormControl('' ,[Validators.required, Validators.minLength(8)] ),
   });
   errorMessage = '';
-  constructor(public authService: AuthService, private router: Router) {
+  constructor(public authService: ApiService, private router: Router) {
 
   }
 
@@ -35,13 +35,11 @@ export class PageConnexionComponent {
     const password = this.formGroup.controls.password.value;
     console.log(email);
     if (email != null && password != null) {
-      this.authService.login(email, password).pipe().subscribe(
+      this.authService.login(email, password).subscribe(
         {
           next: (response) => {
             if (response && response.id) {
               this.connectedUser = response;
-              localStorage.setItem("userId", this.connectedUser.id.toString())
-
               this.router.navigate(['creationProfil/user/']);
 
             } else {
