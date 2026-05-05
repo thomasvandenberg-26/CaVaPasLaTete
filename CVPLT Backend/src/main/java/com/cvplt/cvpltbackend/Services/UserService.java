@@ -5,6 +5,7 @@ import com.cvplt.cvpltbackend.Repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,18 +17,22 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    private User savedUser;
-    public User createUser ( User user){
-        String email = user.getEmail();
+    private final PasswordEncoder passwordEncoder;
 
-    String pwdMd5 = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
-    String bcryptPwd = encoder.encode(user.getPassword());
-    if(userRepository.findUserByEmail(email) == null){}
-        {  savedUser = userRepository.save(new User( user.getType(), user.getPrenom(),user.getNom(),user.getEmail(),bcryptPwd));
-            log.info( "Create User : données recues : " + user.getEmail() + "; " );
+    private User savedUser;
+
+    public UserService(UserRepository userRepository ,PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public User createUser(User user) {
+        // Vérifie si l'email existe déjà
+        User userExistant = userRepository.findUserByEmail(user.getEmail());
+        if (userExistant != null) { // il existe
+            return null; // ou lancer une exception
         }
-       return savedUser;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
     public User authenticate(String email, String password)

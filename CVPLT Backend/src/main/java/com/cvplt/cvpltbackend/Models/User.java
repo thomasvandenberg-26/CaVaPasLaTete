@@ -18,11 +18,23 @@ public class User {
     private long id;
     @Enumerated(EnumType.STRING)
     private Type type;
+    @Getter
+    @Setter
     private String prenom;
+    @Getter
+    @Setter
     private String nom;
+    @Getter
+    @Setter
     private String email;
+    @Getter
+    @Setter
     private String password;
+    @Getter
+    @Setter
     private String specialite;
+    @Getter
+    @Setter
     private String description;
 
     public User( Type type,String prenom , String nom, String email ,String password) {

@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,7 @@ public class UserController {
 
     private UserService userService  ;
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
@@ -32,10 +35,14 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<User> registerUser(@RequestBody User user)
-    {
-        logger.info("Données reçues : {}", user.getNom() + " " + user.getPrenom() + " " + user.getEmail() + " " + user.getType());
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
         User savedUser = userService.createUser(user);
+        if (savedUser == null) {
+            // il existe 
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Un compte existe déjà avec cet email");
+        }
+        savedUser.setPassword(null);
         return ResponseEntity.ok(savedUser);
     }
     @PostMapping("/login")
