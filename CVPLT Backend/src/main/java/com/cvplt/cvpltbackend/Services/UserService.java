@@ -49,10 +49,6 @@ public class UserService {
         }
         return savedUser;
     }
-    public User userUpdate(String email, String specialite)
-    {
-        return userRepository.updateSpecialiteByEmail(email, specialite);
-    }
     public int getUserId(String email)
     {
         return userRepository.findIdByEmail(email);

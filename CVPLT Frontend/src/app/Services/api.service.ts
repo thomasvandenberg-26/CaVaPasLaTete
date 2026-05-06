@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../Models/User';
 @Injectable({
@@ -7,21 +7,26 @@ import {User} from '../Models/User';
 })
 export class ApiService {
 
-  private headers: Headers = new Headers({ 'Content-Type': 'application/json' , 'Accept': 'application/json'});
+  private username = "vandenberg";
+  private password = "LeadDev2527";
+  private headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' , 'Accept': 'application/json', 'Authorization': `Basic ${btoa(`${this.username}:${this.password}`)}`});
   private apiUrl = 'http://localhost:8080/api/users'
+
   constructor(private http: HttpClient) {
   }
 
   sendData(data: any, url: string): Observable<any> {
-    return this.http.post( this.apiUrl+url, data);
+    return this.http.post(this.apiUrl + url, data, { headers: this.headers });
   }
 
   sendDataProfil(data: any, url: string): Observable<any> {
-    return this.http.post(this.apiUrl+url, data);
+    return this.http.post(this.apiUrl+url, data, { headers: this.headers });
   }
-  getUserId(data: any, url: string): Observable<any> {
-    console.log("GetUserId : " +  data);
-    return this.http.get( this.apiUrl+url, data);
+  getUserId(email: string): Observable<any> {
+
+    let url = this.apiUrl +"/user/" + email;
+
+    return this.http.get( url,  { headers: this.headers });
   }
   getUserFirstName(data: any)
   {
