@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ça va pas la tête — Plateforme inclusive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:    #065758;
+      --primary-dk: #044344;
+      --action:     #42A390;
+      --action-dk:  #1f6b5e;
+      --accent:     #82C3C5;
+      --emotion:    #C46960;
+      --surface:    #E2F0EF;
+      --base:       #F6F5F1;
+      --muted:      #90A6B4;
+      --on-primary: #E2F0EF;
+      --white:      #ffffff;
+      --radius-sm:  8px;
+      --radius-md:  12px;
+      --radius-lg:  16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--base);
+      color: var(--primary);
+      min-height: 100vh;
+    }
+
+    /* ── NAVIGATION ─────────────────────────────── */
+    nav {
+      background: var(--primary);
+      padding: 0 60px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Nunito', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--on-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: #fff; }
+    .nav-links a.active { border-bottom: 1.5px solid var(--accent); padding-bottom: 2px; }
+
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+
+    .btn-ghost-nav {
+      font-size: 13px;
+      color: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.28);
+      background: none;
+      padding: 7px 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-ghost-nav:hover { background: rgba(255,255,255,0.08); }
+
+    .btn-cta-nav {
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--action);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-cta-nav:hover { background: var(--action-dk); }
+
+    /* ── HERO SPLIT ──────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: calc(100vh - 64px);
+    }
+
+    .hero-left {
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+      background: var(--base);
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--action);
+    }
+
+    .hero-h1 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(32px, 3.2vw, 48px);
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.25;
+    }
+
+    .hero-h1 span { color: var(--action); }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 460px;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+    .tag-a { background: var(--surface); color: var(--primary); }
+    .tag-b { background: #d4ede9; color: var(--action-dk); }
+    .tag-c { background: #fae8e7; color: #8a3f3a; }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .btn-main {
+      font-size: 15px;
+      font-weight: 500;
+      background: var(--primary);
+      color: var(--on-primary);
+      border: none;
+      padding: 13px 28px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background .2s, transform .1s;
+    }
+    .btn-main:hover  { background: var(--primary-dk); }
+    .btn-main:active { transform: scale(0.98); }
+
+    .btn-sec {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--action);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* colonne droite */
+    .hero-right {
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 48px;
+      gap: 14px;
+    }
+
+    .hero-right-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 4px;
+    }
+
+    .profile-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--accent);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      max-width: 320px;
+      transition: transform .15s, border-color .15s;
+    }
+    .profile-card:hover { transform: translateY(-2px); border-color: var(--primary); }
+    .profile-card.feat  { border: 2px solid var(--primary); }
+
+    .av {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .av1 { background: #b2d8d8; color: var(--primary-dk); }
+    .av2 { background: #b8e0d9; color: var(--action-dk); }
+    .av3 { background: #f0cec9; color: #8a3f3a; }
+
+    .pinfo { flex: 1; min-width: 0; }
+    .pname { font-size: 14px; font-weight: 500; color: var(--primary); }
+    .ploc  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .pbadge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 10px;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+    .pb1 { background: var(--surface); color: var(--primary); }
+    .pb2 { background: #d4ede9; color: var(--action-dk); }
+    .pb3 { background: #fae8e7; color: #8a3f3a; }
+
+    .heart-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .15s;
+      border: none;
+    }
+    .heart-btn svg { width: 15px; height: 15px; }
+    .heart-on  { background: #fae8e7; }
+    .heart-off { background: var(--surface); }
+    .heart-off:hover { background: #fae8e7; }
+
+    /* ── TRUST BAR ───────────────────────────────── */
+    .trust-bar {
+      background: var(--white);
+      border-top: 1px solid var(--surface);
+      border-bottom: 1px solid var(--surface);
+      padding: 18px 60px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .trust-item { display: flex; align-items: center; gap: 10px; }
+
+    .trust-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-icon svg { width: 16px; height: 16px; }
+
+    .trust-text { font-size: 13px; color: var(--muted); }
+
+    /* ── COMMENT ÇA MARCHE ───────────────────────── */
+    .section { padding: 80px 60px; }
+
+    .sec-header { text-align: center; margin-bottom: 48px; }
+    .sec-eyebrow {
+      font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      color: var(--action); margin-bottom: 8px;
+    }
+    .sec-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 28px; font-weight: 600;
+      color: var(--primary);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .step {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--surface);
+      padding: 32px 28px;
+      text-align: center;
+      position: relative;
+      transition: transform .2s, border-color .2s;
+    }
+    .step:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+    .step-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--on-primary);
+      font-size: 14px; font-weight: 500;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .step-ico {
+      font-size: 32px;
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .step-title {
+      font-size: 16px; font-weight: 500;
+      color: var(--primary); margin-bottom: 8px;
+    }
+
+    .step-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    .step-connector {
+      position: absolute;
+      right: -22px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: var(--accent);
+      z-index: 1;
+    }
+
+    /* ── TÉMOIGNAGE ──────────────────────────────── */
+    .temo-section {
+      background: var(--surface);
+      padding: 80px 60px;
+    }
+
+    .temo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    .temo-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--action);
+      padding: 32px 36px;
+    }
+
+    .temo-quote {
+      font-family: 'Nunito', sans-serif;
+      font-size: 48px; line-height: 1;
+      color: var(--accent); margin-bottom: 12px;
+    }
+
+    .temo-text {
+      font-size: 15px; color: var(--primary);
+      line-height: 1.8; font-style: italic;
+    }
+
+    .temo-author {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 20px; padding-top: 20px;
+      border-top: 1px solid var(--surface);
+    }
+
+    .temo-av {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 500; color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .temo-name { font-size: 14px; font-weight: 500; color: var(--primary); }
+    .temo-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .stats-col { display: flex; flex-direction: column; gap: 14px; }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-ico {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+    }
+
+    .stat-num {
+      font-family: 'Nunito', sans-serif;
+      font-size: 24px; font-weight: 600;
+      color: var(--primary);
+    }
+    .stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* ── CTA FINAL ───────────────────────────────── */
+    .cta-section {
+      background: var(--primary);
+      padding: 64px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .cta-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 28px; font-weight: 600;
+      color: var(--white); margin-bottom: 6px;
+    }
+    .cta-sub { font-size: 15px; color: rgba(255,255,255,0.55); }
+
+    .btn-cta-final {
+      font-size: 15px; font-weight: 500;
+      background: var(--action);
+      color: var(--white);
+      border: none;
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background .2s;
+    }
+    .btn-cta-final:hover { background: var(--action-dk); }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--primary-dk);
+      padding: 20px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-links a:hover { color: rgba(255,255,255,0.75); }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav aria-label="Navigation principale">
+    <a href="#" class="nav-logo"><div class="nav-dot"></div>Ça va pas la tête</a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Accueil</a></li>
+      <li><a href="#">Tchat</a></li>
+      <li><a href="#">Les articles</a></li>
+      <li><a href="#">Proposer un article</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-ghost-nav">Se connecter</button>
+      <button class="btn-cta-nav">S'inscrire gratuitement</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Section principale">
+    <div class="hero-left">
+      <p class="eyebrow">Plateforme inclusive & bienveillante</p>
+      <h1 class="hero-h1">Un espace pour<br><span>se retrouver</span>,<br>sans jugement</h1>
+      <p class="hero-sub">Échangez avec des personnes en situation de handicap, des proches aidants et des professionnels de santé dans un espace sécurisé et bienveillant.</p>
+      <div class="tags">
+        <span class="tag tag-a">100 % accessible</span>
+        <span class="tag tag-b">Bienveillant</span>
+        <span class="tag tag-c">Sécurisé</span>
+      </div>
+      <div class="hero-btns">
+        <button class="btn-main">Rejoindre la communauté</button>
+        <button class="btn-sec">En savoir plus →</button>
+      </div>
+    </div>
+
+    <div class="hero-right" aria-label="Exemples de profils">
+      <p class="hero-right-label">Membres récents</p>
+
+      <div class="profile-card feat" aria-label="Profil de Marie">
+        <div class="av av1">ML</div>
+        <div class="pinfo">
+          <p class="pname">Marie, 28 ans</p>
+          <p class="ploc">Lyon · 3 km</p>
+          <span class="pbadge pb1">Malvoyante</span>
+        </div>
+        <button class="heart-btn heart-on" aria-label="Connecté avec Marie">
+          <svg viewBox="0 0 16 16" fill="#C46960"><path d="M8 13.7C7.6 13.4 1 9.2 1 5.5 1 3.6 2.6 2 4.5 2c1 0 2 .5 2.6 1.3L8 4.5l.9-1.2C9.5 2.5 10.5 2 11.5 2 13.4 2 15 3.6 15 5.5c0 3.7-6.6 7.9-7 8.2z"/></svg>
+        </button>
+      </div>
+
+      <div class="profile-card" aria-label="Profil de Thomas">
+        <div class="av av2">TK</div>
+        <div class="pinfo">
+          <p class="pname">Thomas, 34 ans</p>
+          <p class="ploc">Paris · 12 km</p>
+          <span class="pbadge pb2">Proche aidant</span>
+        </div>
+        <button class="heart-btn heart-off" aria-label="Se connecter avec Thomas">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#90A6B4" stroke-width="1.5"><path d="M8 13.7C7.6 13.4 1 9.2 1 5.5 1 3.6 2.6 2 4.5 2c1 0 2 .5 2.6 1.3L8 4.5l.9-1.2C9.5 2.5 10.5 2 11.5 2 13.4 2 15 3.6 15 5.5c0 3.7-6.6 7.9-7 8.2z" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="profile-card" aria-label="Profil de Sophie">
+        <div class="av av3">SC</div>
+        <div class="pinfo">
+          <p class="pname">Sophie, 41 ans</p>
+          <p class="ploc">Bordeaux · 5 km</p>
+          <span class="pbadge pb3">Infirmière</span>
+        </div>
+        <button class="heart-btn heart-off" aria-label="Se connecter avec Sophie">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#90A6B4" stroke-width="1.5"><path d="M8 13.7C7.6 13.4 1 9.2 1 5.5 1 3.6 2.6 2 4.5 2c1 0 2 .5 2.6 1.3L8 4.5l.9-1.2C9.5 2.5 10.5 2 11.5 2 13.4 2 15 3.6 15 5.5c0 3.7-6.6 7.9-7 8.2z" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust bar -->
+  <div class="trust-bar" aria-label="Nos engagements">
+    <div class="trust-item">
+      <div class="trust-icon" style="background:var(--surface);">
+        <svg viewBox="0 0 16 16" fill="none" stroke="#065758" stroke-width="1.5"><path d="M8 1.5L9.8 5.5H14L10.8 8 12 12.5 8 10 4 12.5 5.2 8 2 5.5h4.2z" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="trust-text">Interface accessible WCAG 2.1 AA</span>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon" style="background:#d4ede9;">
+        <svg viewBox="0 0 16 16" fill="none" stroke="#42A390" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5 8l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="trust-text">Profils vérifiés par notre équipe</span>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon" style="background:#dff0f0;">
+        <svg viewBox="0 0 16 16" fill="none" stroke="#82C3C5" stroke-width="1.5"><rect x="3" y="7" width="10" height="8" rx="2"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>
+      </div>
+      <span class="trust-text">Données protégées & RGPD</span>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon" style="background:#fae8e7;">
+        <svg viewBox="0 0 16 16" fill="none" stroke="#C46960" stroke-width="1.5"><path d="M8 2C5.2 2 3 4.2 3 7c0 3.5 5 8 5 8s5-4.5 5-8c0-2.8-2.2-5-5-5z"/><circle cx="8" cy="7" r="1.5"/></svg>
+      </div>
+      <span class="trust-text">Communauté partout en France</span>
+    </div>
+  </div>
+
+  <!-- Comment ça marche -->
+  <section class="section" aria-labelledby="how-title">
+    <div class="sec-header">
+      <p class="sec-eyebrow">Simple & rapide</p>
+      <h2 class="sec-title" id="how-title">Comment ça marche ?</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <svg class="step-ico" viewBox="0 0 32 32" fill="none" stroke="#82C3C5" stroke-width="1.5" aria-hidden="true"><circle cx="16" cy="10" r="5"/><path d="M6 28c0-5.5 4.5-10 10-10s10 4.5 10 10"/><circle cx="24" cy="10" r="3" stroke="#b2d8d8"/><path d="M27 19c2 1 3.5 3 3.5 5.5" stroke="#b2d8d8"/></svg>
+        <h3 class="step-title">Je crée mon profil</h3>
+        <p class="step-desc">Inscription gratuite en 2 minutes, sans engagement ni carte bancaire.</p>
+        <span class="step-connector" aria-hidden="true">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <svg class="step-ico" viewBox="0 0 32 32" fill="none" stroke="#42A390" stroke-width="1.5" aria-hidden="true"><path d="M4 26c0-6.6 5.4-12 12-12s12 5.4 12 12"/><circle cx="16" cy="10" r="6"/><path d="M10 14l6 6 6-6" stroke="#b8e0d9"/></svg>
+        <h3 class="step-title">Je rejoins la communauté</h3>
+        <p class="step-desc">Accédez au tchat et rencontrez des personnes qui vivent la même chose.</p>
+        <span class="step-connector" aria-hidden="true">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <svg class="step-ico" viewBox="0 0 32 32" fill="none" stroke="#C46960" stroke-width="1.5" aria-hidden="true"><path d="M16 27C15.4 26.6 4 19.5 4 11.5 4 8 6.7 5 10 5c1.8 0 3.5.9 4.6 2.3L16 9l1.4-1.7C18.5 5.9 20.2 5 22 5c3.3 0 6 3 6 6.5C28 19.5 16.6 26.6 16 27z"/></svg>
+        <h3 class="step-title">Je crée des liens</h3>
+        <p class="step-desc">Trouvez du soutien, partagez votre vécu, échangez avec des soignants.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Témoignage -->
+  <section class="temo-section" aria-labelledby="temo-title">
+    <div class="sec-header">
+      <p class="sec-eyebrow">Ils témoignent</p>
+      <h2 class="sec-title" id="temo-title">Ce qu'ils en disent</h2>
+    </div>
+    <div class="temo-grid">
+      <div class="temo-card">
+        <div class="temo-quote">"</div>
+        <p class="temo-text">Grâce à cette plateforme, j'ai trouvé des personnes qui vivent la même chose que moi. Je me sens moins seule et enfin comprise. Les professionnels de santé présents m'ont aussi beaucoup aidée.</p>
+        <div class="temo-author">
+          <div class="temo-av">CL</div>
+          <div>
+            <p class="temo-name">Claire L.</p>
+            <p class="temo-role">Membre depuis 6 mois · Sclérose en plaques</p>
+          </div>
+        </div>
+      </div>
+      <div class="stats-col">
+        <div class="stat-card">
+          <div class="stat-ico" style="background:var(--surface);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#065758" stroke-width="1.5" width="22" height="22"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <p class="stat-num">2 400+</p>
+            <p class="stat-label">Membres actifs</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-ico" style="background:#d4ede9;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#42A390" stroke-width="1.5" width="22" height="22"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div>
+            <p class="stat-num">180+</p>
+            <p class="stat-label">Articles publiés</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-ico" style="background:#fae8e7;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#C46960" stroke-width="1.5" width="22" height="22"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <div>
+            <p class="stat-num">95%</p>
+            <p class="stat-label">Se sentent écoutés</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="cta-section" aria-label="Appel à l'action">
+    <div>
+      <h2 class="cta-title">Prêt à rejoindre la communauté ?</h2>
+      <p class="cta-sub">Gratuit, sans engagement, accessible à tous.</p>
+    </div>
+    <button class="btn-cta-final">Créer mon compte gratuitement</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo"><div class="nav-dot"></div>Ça va pas la tête</div>
+    <div class="footer-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Contact</a>
+      <a href="#">Accessibilité</a>
+    </div>
+  </footer>
+
+</body>
+</html>
