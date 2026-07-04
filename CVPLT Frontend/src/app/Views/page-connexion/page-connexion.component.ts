@@ -28,6 +28,16 @@ export class PageConnexionComponent {
   errorMessage = '';
   constructor(public authService: ApiService, private router: Router) {
 
+
+
+
+
+
+
+
+
+
+
   }
 
   onLogin() {

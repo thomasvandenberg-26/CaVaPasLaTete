@@ -5,6 +5,7 @@ import com.cvplt.cvpltbackend.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -28,7 +32,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable()) // Désactive CSRF uniquement si ce n'est pas nécessaire
-                .cors(cors -> cors.configure(http)) // Configure le CORS
+                .cors(Customizer.withDefaults()) // Configure le CORS
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/create").permitAll()
                         .requestMatchers("/api/users/login").permitAll()
@@ -57,5 +61,26 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
     // @formatter:on
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
 
+        CorsConfiguration publicConfig = new CorsConfiguration();
+        publicConfig.addAllowedOrigin("http://localhost:4200");
+        publicConfig.addAllowedMethod("*");
+        publicConfig.addAllowedHeader("*");
+        publicConfig.setAllowCredentials(false); // pas de credentials
+
+
+
+        CorsConfiguration privateConfig = new CorsConfiguration();
+        privateConfig.addAllowedOrigin("http://localhost:4200");
+        privateConfig.addAllowedMethod("*");
+        privateConfig.addAllowedHeader("*");
+        privateConfig.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", privateConfig);
+        source.registerCorsConfiguration("/api/users/create", publicConfig);
+        return source;
+    }
 }
